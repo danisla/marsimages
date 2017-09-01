@@ -8,7 +8,12 @@ import (
 	"math"
 	"net/http"
 	"os"
+	"runtime"
 	"time"
+
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/log"
+	"google.golang.org/appengine/urlfetch"
 
 	marsimages "github.com/danisla/go-marsimages"
 	_ "github.com/go-sql-driver/mysql"
@@ -25,6 +30,36 @@ type pageData struct {
 
 func init() {
 	http.HandleFunc("/", imagesHandler)
+	http.HandleFunc("/update", updateHandler)
+}
+
+func updateHandler(w http.ResponseWriter, r *http.Request) {
+	ctx := appengine.NewContext(r)
+	client := urlfetch.Client(ctx)
+
+	connectionProto := mustGetenv("SQL_CONNECTION_PROTO")
+	connectionName := mustGetenv("CLOUDSQL_CONNECTION_NAME")
+	user := mustGetenv("CLOUDSQL_USER")
+	password := os.Getenv("CLOUDSQL_PASSWORD") // NOTE: password may be empty
+	imageDb := mustGetenv("IMAGE_DATABASE")
+
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@%s(%s)/%s", user, password, connectionProto, connectionName, imageDb))
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Could not open db: %v", err), 500)
+		return
+	}
+	defer db.Close()
+
+	db.SetMaxOpenConns(runtime.NumCPU() * 2)
+
+	count, err := importImages(-10, -1, db, client)
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Error updating images: %v", err), 500)
+		return
+	}
+
+	log.Infof(ctx, "Imported %d images.", count)
+	fmt.Fprintf(w, fmt.Sprintf("Imported %d images.", count))
 }
 
 func imagesHandler(w http.ResponseWriter, r *http.Request) {

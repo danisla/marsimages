@@ -1,8 +1,9 @@
-package main
+package marsimages
 
 import (
 	"database/sql"
 	"log"
+	"net/http"
 	"strconv"
 	"strings"
 	"sync"
@@ -12,11 +13,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func importImages(solStart, solEnd int, db *sql.DB) (int, error) {
+func importImages(solStart, solEnd int, db *sql.DB, client *http.Client) (int, error) {
 
 	const manifestURL = "https://mars.jpl.nasa.gov/msl-raw-images/image/image_manifest.json"
 
-	manifest, err := marsimages.FetchManifest(manifestURL)
+	manifest, err := marsimages.FetchManifest(manifestURL, client)
 	if err != nil {
 		return 0, err
 	}
@@ -48,7 +49,7 @@ func importImages(solStart, solEnd int, db *sql.DB) (int, error) {
 		url := manifest.Sols[i].CatalogURL
 		go func(url string) {
 			defer wg.Done()
-			catalog, err := marsimages.FetchCatalog(url)
+			catalog, err := marsimages.FetchCatalog(url, client)
 			if err != nil {
 				log.Printf("Error fetching url: %s: %s\n", url, err)
 			} else {

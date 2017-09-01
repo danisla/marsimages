@@ -28,27 +28,21 @@ Create the `mars-images` database:
 gcloud sql databases create mars-images --instance=mars-images
 ```
 
-## Load data
-
-Use the helper script to load data into the SQL database through the [cloud_sql_proxy](https://cloud.google.com/sql/docs/mysql/sql-proxy):
-
-```
-./load_data.sh
-```
-
-This script will prompt you for the SQL password if it hasn't been exported and can be run multiple times to update the data.
-
 ## Deploy to App Engine
 
 ```
 gcloud app deploy
 ```
 
-Open in browser:
+## Load data
+
+Use the admin route to load the initial data set.
 
 ```
-gcloud app browse
+open $(gcloud app browse --no-launch-browser)/update
 ```
+
+> Enter your admin password to authenticate when prompted.
 
 ## Local development
 

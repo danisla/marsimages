@@ -1,1 +1,0 @@
-Helper program to load Mars Image data into SQL database.
