@@ -31,8 +31,8 @@ trap finish EXIT
 
 echo "INFO: Loading data..."
 
-cd ./load-data-sql/
-go run main.go -user ${CLOUDSQL_USER} -password ${CLOUDSQL_PASSWORD}
+cd ./loader_cli/
+go run *.go -user ${CLOUDSQL_USER} -password ${CLOUDSQL_PASSWORD}
 cd - >/dev/null
 
 echo "INFO: Done"

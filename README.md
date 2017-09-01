@@ -55,6 +55,11 @@ gcloud app browse
 Start the Close SQL Proxy:
 
 ```
+GOOGLE_PROJECT=$(gcloud config get-value project)
+CLOUDSQL_CONNECTION_NAME="${GOOGLE_PROJECT}:us-central1:mars-images"
+```
+
+```
 ./cloud_sql_proxy -instances=${CLOUDSQL_CONNECTION_NAME}=tcp:3306
 ```
 
