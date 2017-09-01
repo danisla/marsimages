@@ -1,4 +1,6 @@
-# Mars Images App Engine to MySQL App
+# Mars Images App
+
+Displays the latest images from the Mars rover Curiosity.
 
 ## Create CloudSQL Instance
 
