@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Mars Images</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="blue-grey lighten-3">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <nav class="nav-extended">
+        <div class="nav-wrapper blue-grey darken-4 text-white">
+            <a href="#" class="brand-logo">Mars Images</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light btn blue-grey darken-1" href="https://github.com/danisla/marsimages" target="_blank">Github <i class="material-icons right">cloud_download</i></a></li>
+            </ul>
+        </div>
+        <div class="nav-content blue-grey darken-4 text-white">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a class="active" href="#latest">Latest</a></li>
+                <li class="tab"><a href="#mahli">MAHLI</a></li>
+                <li class="tab"><a href="#mastcam">Mastcam</a></li>
+                <li class="tab"><a href="#navcam">Navcam</a></li>
+                <li class="tab"><a href="#hazcam">Hazcam</a></li>
+                <li class="tab"><a href="#chemcam">Chemcam</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="latest" class="container">
+        <div class="row">
+            {{ range .Latest.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="mahli" class="container">
+        <div class="row">
+            {{ range .Mahli.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="mastcam" class="container">
+        <div class="row">
+            {{ range .Mastcam.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="navcam" class="container">
+        <div class="row">
+            {{ range .Navcam.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="hazcam" class="container">
+        <div class="row">
+            {{ range .Hazcam.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="chemcam" class="container">
+        <div class="row">
+            {{ range .Chemcam.Images }}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img src="{{ .URL }}" href="#" data-name="{{ .ItemName }}" onclick="showModal(this)">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">{{ .Instrument }}<i class="material-icons right">more_vert</i></span>
+                        <p>{{ .UTC | fromNow }}</p>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{ .UTC | fromNow }}<i class="material-icons right">close</i></span>
+                        <p><b>Instrument:</b> {{ .Instrument }}</p>
+                        <p><b>LMST:</b> {{ .LMST }}</p>
+                        <p><b>UTC:</b> {{ .UTC }}</p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h5></h5>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function showModal(e) {
+            $("#modal-image").remove();
+            $('#modal').modal("open");
+            $('.modal-content h5').text($(e).data("name"));
+            $('.modal-content').append($('<img>').attr({
+                "src": $(e).attr("src"),
+                "id": "modal-image",
+                "width": "100%",
+            }));
+        }
+        $(document).ready(function () {
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+
+        $(".button-collapse").sideNav();
+    </script>
+</body>
+
+</html>
