@@ -30,8 +30,10 @@ gcloud sql databases create mars-images --instance=mars-images
 
 ## Deploy to App Engine
 
+Deploy the app and cron job:
+
 ```
-gcloud app deploy
+gcloud app deploy app.yaml cron.yaml
 ```
 
 ## Load data
