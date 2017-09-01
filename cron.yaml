@@ -1,4 +1,5 @@
 cron:
 - description: Update images
   url: /update
+  target: mars
   schedule: every 1 hours
